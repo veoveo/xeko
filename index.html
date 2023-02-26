@@ -1,0 +1,372 @@
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- bootstrap 4.3.1 -->
+  <meta name="description" content="Nhận thêm 1000 shopee xu khi đơn hàng hoàn thành qua link chuyển đổi!">
+
+	<!-- Facebook Meta Tags -->
+	<meta property="og:url" content="https://tolakol.ml/">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Mua hàng nhận thêm 1000xu">
+	<meta property="og:description" content="Nhận thêm 1000 shopee xu khi đơn hàng hoàn thành qua link chuyển đổi!">
+	<meta property="og:image" content="./index_files/avata.png">
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta property="twitter:domain" content="tolakol.ml">
+	<meta property="twitter:url" content="https://tolakol.ml/">
+	<meta name="twitter:title" content="Mua hàng nhận thêm 1000xu">
+	<meta name="twitter:description" content="Nhận thêm 1000 shopee xu khi đơn hàng hoàn thành qua link chuyển đổi!">
+	<meta name="twitter:image" content="./index_files/avata.png">
+  <link rel="stylesheet" href="./index_files/bootstrap.min.css">
+  <!-- styles -->
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4749688870108433" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./index_files/styles.min.css">
+  <!-- simplebar styles -->
+  <link rel="stylesheet" href="./index_files/simplebar.css">
+  <!-- tiny-slider styles -->
+  <link rel="stylesheet" href="./index_files/tiny-slider.css">
+  <!-- favicon -->
+  <link rel="icon" href="https://odindesignthemes.com/vikinger/img/favicon.ico">
+  <title>TOLAKOL</title>
+  <style type="text/css">
+    #loading, #sucess, #nonephone, #havephone, #err {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 1;
+    background-color: #000000b5;
+    z-index: 99;
+}
+  </style>
+<style media="screen">
+    	*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.popup{
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 420px;
+    padding: 30px 40px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    border-radius: 8px;
+    font-family: "Poppins",sans-serif;
+    display: none; 
+    text-align: center;
+}
+.popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 30px;
+    color: #ffffff;
+		background: #03549a;
+		border-radius: 100%;
+		width: 40px;
+		height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.popup h2{
+	margin-top: -20px;
+}
+.popup p{
+    font-size: 14px;
+    text-align: justify;
+    margin: 20px 0;
+    line-height: 25px;
+}
+    </style>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script> 
+  <script>
+  async function getapi(url) {
+    // Storing response
+    $('#load1').show();
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    console.log(data);
+    show(data, "item");
+    $('#load1').hide();
+}; 
+	  
+  async function add() {
+    document.getElementById('loading').style.display = 'block';
+	
+	const jsonData = {};
+	jsonData["url"] = document.getElementById("spc_ec").value;
+
+	const data = JSON.stringify(jsonData);
+
+	const url = "http://58.187.113.80:5000/additem";
+
+	$.ajax({
+	  url: url,
+	  type: "POST",
+	  data: data,
+	  success: function(response) {
+		// Xử lý phản hồi từ máy chủ
+		console.log(response);
+		document.getElementById('loading').style.display = 'none';
+		document.getElementById('err').style.display = 'block';
+		var num_item = document.getElementById("num_item");
+		num_item.innerHTML = "Sản phẩm của bạn được gắn số "+response["item_id"]+" trong live!";
+		var short_link = document.getElementById("short_link");
+		short_link.href = response["short_link"];
+
+	  },
+	  error: function(xhr, status, error) {
+		// Xử lý lỗi nếu có
+		console.log(error);
+		document.getElementById('loading').style.display = 'none';
+	  }
+	});
+    
+
+};
+	  
+	  
+  async function shork(url) {
+    $('#load').show();
+    let user = document.getElementById("user").value;
+    let link = document.getElementById("link").value;
+    // Storing response
+    const response = await fetch("https://tolakol.herokuapp.com/", {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: `{
+      "user": "${user}",
+      "link": "${link}"
+      }`,
+    });
+
+    response.json().then(data => {
+      console.log(data);
+      show1([data],"item2")
+    });
+    $('#load').hide();
+
+};
+function show(data, item) {
+    let tab = "";
+    // Loop to access all rows 
+    for (let r of data) {
+        tab += `<a href=${r.url}> 
+<div class="badge-item-preview">
+        <img class="badge-item-preview-image" style="background-color: #c8c8c8;border-radius: 6px;" src="${r.img}" alt="badge-gold-b">
+        <div class="badge-item-preview-info" href="https://shopee.vn/product/393363168/10276471405">
+          <p class="badge-item-preview-title" style="padding-bottom: 2px;">${r.name}</p>
+          <p class="badge-item-preview-timestamp">${r.price}đ</p>
+          <p class="badge-item-preview-text">${r.daban}</p>
+        </div>
+      </div>
+      </a>`;
+    }
+    // Setting innerHTML as tab variable
+    document.getElementById(item).innerHTML = tab;
+};
+
+function show1(data, item) {
+    let tab = "";
+    // Loop to access all rows 
+    for (let r of data) {
+        tab += `<a href=${r.url}> 
+<div class="badge-item-preview">
+        <img class="badge-item-preview-image" style="background-color: #c8c8c8;border-radius: 6px;" src="${r.img}" alt="badge-gold-b">
+        <div class="badge-item-preview-info" href="https://shopee.vn/product/393363168/10276471405">
+          <p class="badge-item-preview-title" style="padding-bottom: 2px;">${r.name}</p>
+          <p class="badge-item-preview-timestamp">${r.price}</p>
+          <p class="badge-item-preview-text">${r.url}</p>
+        </div>
+      </div>
+      </a>
+      <div class="section-filters-bar v2" style="margin: 0;box-shadow: none;background: #fff;padding: 0px;"><div class="section-filters-bar-actions full"><div class="form"><div class="form-row split"><div class="form-item"><div class="form-input small with-button active"><input type="text" value="${r.url}" readonly="readonly" style="border: 1px solid #dedeea;"><button onclick="copy('${r.url}')" class="button primary" style="background: #4b9bff;width: 40%;line-height: 20px">sao chép</button></div></div>
+</div></div></div>
+</div>`;
+    }
+    // Setting innerHTML as tab variable
+    document.getElementById(item).innerHTML = tab;
+};
+
+    function copy(va) {
+        var $temp = $("<input>");
+          $("body").append($temp);
+          $temp.val(va).select();
+          document.execCommand("copy");
+          $temp.remove();
+          alert("bạn đã coppy " + va);
+    
+    }
+    
+
+  </script>
+  <script>
+  
+  function al(value) {
+    document.getElementById('find').value = ''
+    getapi("https://6249aef5fd7e30c51c04e599.mockapi.io/in4/"+value)
+  };
+   function changeFunc() {
+    var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    al(selectedValue);
+   };
+   function findit() {
+    var e = document.getElementById("selectBox");
+    var strtype = e.options[e.selectedIndex].value;
+    let inputValue = document.getElementById("find").value; 
+    console.log(inputValue)
+    getapi("https://6249aef5fd7e30c51c04e599.mockapi.io/in4/"+strtype+"?name="+inputValue)
+   }
+  </script>
+  
+<style></style><style></style></head>
+<body onload="al('all')">
+
+  <!-- PAGE LOADER -->
+  <div id="loading" style="display: none;">
+      <div class="loader-bars" style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+">
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+          <div class="loader-bar"></div>
+        </div>
+  </div>
+  
+
+  
+  <div class="content-grid" style="transform: translate(0px, 0px); transition: transform 0.4s ease-in-out 0s;">
+    <!-- PROFILE HEADER -->
+    <div class="profile-header">
+      <!-- PROFILE HEADER COVER -->
+      <figure class="profile-header-cover liquid" style="background: url(&quot;./index_files/01.jpg&quot;) center center / cover no-repeat;">
+        <img src="./index_files/01.jpg" alt="cover-01" style="display: none;">
+      </figure>
+      <!-- /PROFILE HEADER COVER -->
+  
+      <!-- PROFILE HEADER INFO -->
+      <div class="profile-header-info">
+        <!-- USER SHORT DESCRIPTION -->
+        <div class="user-short-description big">
+          <!-- USER SHORT DESCRIPTION AVATAR -->
+          <a class="user-short-description-avatar user-avatar big no-stats" onclick="openimg()" href="#">
+            <!-- USER AVATAR BORDER -->
+            
+        
+            <img src="./index_files/avata.png" alt="" style="max-width: 169px;width: 104%;margin: 0 auto;display: flex;">
+          </a>
+          <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+          <!-- USER SHORT DESCRIPTION AVATAR -->
+          <a class="user-short-description-avatar user-short-description-avatar-mobile user-avatar medium no-stats" href="#" onclick="openimg()">
+            
+            <img src="./index_files/avata.png" alt="" style="max-width: 169px;width: 104%;margin: 0 auto;display: flex;">
+        
+            <!-- USER AVATAR CONTENT -->
+            <!-- /USER AVATAR CONTENT -->
+          </a>
+          <!-- /USER SHORT DESCRIPTION AVATAR -->
+    
+          <!-- USER SHORT DESCRIPTION TITLE -->
+          <p class="user-short-description-title"><a>TOLAKOL</a></p>
+          <!-- /USER SHORT DESCRIPTION TITLE -->
+    
+          <!-- USER SHORT DESCRIPTION TEXT -->
+          <p class="user-short-description-text">shopee.vn/.xeko</p>
+          <div class="profile-header-social-links-wrap" style="display: flex;width: fit-content;justify-content: space-evenly;">
+          <a href=""><div class="tns-outer" id="profile-header-social-links-slider-ow"><div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span class="current">1</span>  of 7</div><img src="./index_files/facebook.jpg" style="width: 41px;margin-top: 4px;margin: 4px 8px 4px 4px;"></div></a>
+          <a href=""><div class="tns-outer" id="profile-header-social-links-slider-ow"><div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true" style="">slide <span class="current">1</span>  of 7</div><img src="./index_files/youtube.png" style="width: 41px;margin-top: 4px;margin: 4px 8px 4px 4px;border-radius: 5px;"></div></a><a href="https://shopee.vn/.xeko"><div class="tns-outer" id="profile-header-social-links-slider-ow"><div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span class="current">1</span>  of 7</div><img src="./index_files/shopee.png" style="width: 48px;"></div></a>
+          
+  
+          <!-- SLIDER CONTROLS -->
+          
+          <!-- /SLIDER CONTROLS -->
+        </div>
+        </div>
+        
+  
+        
+        
+        
+  
+        
+        
+        
+  
+        
+        
+        
+      </div>
+      <!-- /PROFILE HEADER INFO -->
+    </div>
+    <!-- /PROFILE HEADER -->
+
+
+<div style="background: #fff;border-radius: 16px;margin-top: 30px;"><center style="padding: 20px 50px 0px 50px;font-family: monospace;color: #ff551f;font-weight: 700;">Tool tự động thêm link vào live để áp mã live 👍</center>
+<div class="section-filters-bar v2" style="box-shadow: none;margin-top: 0px;"><div class="section-filters-bar-actions full"><div class="form" id="myForm" style=""><div class="form-row split"><div class="form-item"><div class="form-input small with-button" style=""><label for="group-name">Dán link sản phẩm vào đây</label><input type="text" id="spc_ec" style="padding-right: 20px;"></div></div><p class="return-to-shop" style="display: flex;">
+    
+<a onclick="add()" class="button wc-backward" style="min-width: 100px;color: #fff;">Thêm vào live</a><a onclick="document.getElementById('spc_ec').value = '';" class="button wc-backward" style="min-width: 100px;color: #fff;margin-left: 12px;">reset</a>
+    </p>
+  <p></p>
+</div></div></div></div>
+</div>
+	  
+    
+   
+
+    
+
+    
+    <!-- /GRID -->
+  </div>
+  
+
+
+<script src="./index_files/app.bundle.min.js.tải xuống"></script>
+
+
+	
+
+	
+
+	
+<div id="err" style="display: none;">
+      <div class="popup" style="display: block;">
+                <button id="close" onclick="document.getElementById('err').style.display = 'none';">×</button>
+        <h2>Thêm thành công!</h2>
+        <br>
+<h6 id="num_item">Sản phẩm của bạn được gắn số 0 trong live!</h6>
+<br>
+        <a id="short_link" type="button" href="#" class="btn btn-primary" style="
+    color: #fff;
+">Vào live</a>
+    </div>
+  </div>
+
+
+</body></html>
