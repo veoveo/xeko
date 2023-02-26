@@ -20,7 +20,6 @@
 	<meta name="twitter:image" content="./index_files/avata.png">
   <link rel="stylesheet" href="./index_files/bootstrap.min.css">
   <!-- styles -->
-<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4749688870108433" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./index_files/styles.min.css">
   <!-- simplebar styles -->
   <link rel="stylesheet" href="./index_files/simplebar.css">
@@ -28,7 +27,7 @@
   <link rel="stylesheet" href="./index_files/tiny-slider.css">
   <!-- favicon -->
   <link rel="icon" href="https://odindesignthemes.com/vikinger/img/favicon.ico">
-  <title>TOLAKOL</title>
+  <title>Thêm link</title>
   <style type="text/css">
     #loading, #sucess, #nonephone, #havephone, #err {
     position: fixed;
@@ -123,7 +122,7 @@
 		document.getElementById('loading').style.display = 'none';
 		document.getElementById('err').style.display = 'block';
 		var num_item = document.getElementById("num_item");
-		num_item.innerHTML = "Sản phẩm của bạn được gắn số "+response["item_id"]+" trong live!";
+		num_item.innerHTML = response["item_id"];
 		var short_link = document.getElementById("short_link");
 		short_link.href = response["short_link"];
 
@@ -293,7 +292,7 @@ function show1(data, item) {
           <!-- /USER SHORT DESCRIPTION AVATAR -->
     
           <!-- USER SHORT DESCRIPTION TITLE -->
-          <p class="user-short-description-title"><a>TOLAKOL</a></p>
+          <p class="user-short-description-title"><a>XEKO</a></p>
           <!-- /USER SHORT DESCRIPTION TITLE -->
     
           <!-- USER SHORT DESCRIPTION TEXT -->
@@ -360,7 +359,8 @@ function show1(data, item) {
                 <button id="close" onclick="document.getElementById('err').style.display = 'none';">×</button>
         <h2>Thêm thành công!</h2>
         <br>
-<h6 id="num_item">Sản phẩm của bạn được gắn số 0 trong live!</h6>
+<h6>Sản phẩm trong của bạn được gắn số:</h6>
+<h4 id="num_item" style="color: red; padding-top: 10px;">0</h4>
 <br>
         <a id="short_link" type="button" href="#" class="btn btn-primary" style="
     color: #fff;
