@@ -124,7 +124,7 @@
 	  success: function(response) {
 		// Xử lý phản hồi từ máy chủ
 		console.log(response);
-		
+		loadfs(120);
     setTimeout(function() {
       document.getElementById('loading').style.display = 'none';
       document.getElementById('err').style.display = 'block';
@@ -240,6 +240,16 @@ function show1(data, item) {
     console.log(inputValue)
     getapi("https://6249aef5fd7e30c51c04e599.mockapi.io/in4/"+strtype+"?name="+inputValue)
    }
+   function loadfs(times) {
+      if (times > 0) {
+        console.log('hello');
+        document.getElementById("load").innerHTML = "Đang khởi tạo video..." + parseInt(100-(times/1.2)) + "%"
+        times--;
+        setTimeout(function () {
+          loadfs(times);
+        }, 100); // 1000 milliseconds = 1 giây
+      }
+    }
   </script>
   
 <style></style><style></style></head>
