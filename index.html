@@ -132,7 +132,7 @@
       num_item.innerHTML = response["item_id"];
       var short_link = document.getElementById("short_link");
       short_link.href = response["short_link"];
-    }, 10000);
+    }, response["delay"]);
 	  },
 	  error: function(xhr, status, error) {
 		// Xử lý lỗi nếu có
