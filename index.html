@@ -125,6 +125,7 @@
 		// Xử lý phản hồi từ máy chủ
 		console.log(response);
 		document.getElementById('loading').style.display = 'none';
+		await new Promise(resolve => setTimeout(resolve, 10000));
 		document.getElementById('err').style.display = 'block';
 		var num_item = document.getElementById("num_item");
 		num_item.innerHTML = response["item_id"];
