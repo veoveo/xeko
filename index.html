@@ -109,7 +109,7 @@
 	  
   async function add() {
     document.getElementById('loading').style.display = 'block';
-    loadfs(180);
+    loadfs(220);
 	const jsonData = {};
 	jsonData["url"] = document.getElementById("spc_ec").value.replace(/\?.*/, "");
 
@@ -242,7 +242,7 @@ function show1(data, item) {
    function loadfs(times) {
       if (times > 0) {
         console.log('hello');
-        document.getElementById("load").innerHTML = "Đang khởi tạo video..." + parseInt(100-(times/1.8)) + "%"
+        document.getElementById("load").innerHTML = "Đang khởi tạo video..." + parseInt(100-(times/2.2)) + "%"
         times--;
         setTimeout(function () {
           loadfs(times);
