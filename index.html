@@ -109,7 +109,7 @@
 	  
   async function add() {
     document.getElementById('loading').style.display = 'block';
-	
+    loadfs(120);
 	const jsonData = {};
 	jsonData["url"] = document.getElementById("spc_ec").value.replace(/\?.*/, "");
 
@@ -124,7 +124,6 @@
 	  success: function(response) {
 		// Xử lý phản hồi từ máy chủ
 		console.log(response);
-		loadfs(120);
     setTimeout(function() {
       document.getElementById('loading').style.display = 'none';
       document.getElementById('err').style.display = 'block';
